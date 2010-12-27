@@ -50,9 +50,11 @@ function display()
     var now = new Date().getTime();
     for (var i = 0; i < sites.length; i++)
     {
+        var site = sites[i];
         s += '<tr><td>';
+        s += site.frequency + '</td><td>';
         s += '<img src="delete.png" onClick="javascript:deleteRow(' + i + ');"/></td><td>';
-        s += sites[i].url + '</td></tr>';
+        s += site.url + '</td></tr>';
     }
     s += '</table>';
     $('#container').html(s);
