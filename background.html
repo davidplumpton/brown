@@ -7,6 +7,22 @@ function compareSite(s1, s2) {
     return 0;
 }
 
+function getDelay(site) {
+    var frequency = site.frequency;
+    var amount = parseInt(frequency.substring(0, frequency.lenth - 1));
+    var period = frequency.substring(frequency.length - 1);
+    if (period == 'd') {
+        return amount * 24 * 60 * 60 * 1000;
+    }
+    if (period == 'h') {
+        return amount * 60 * 60 * 1000;
+    }
+    if (period == 'w') {
+        return amount * 7 * 24 * 60 * 60 * 1000;
+    }
+    alert('Bad frequency value: ' + frequency);
+}
+
 function nextPage() {
     var data = localStorage['nexty.data'];
     var sites = JSON.parse(data);
@@ -17,7 +33,7 @@ function nextPage() {
     {
         url = 'http://' + url;
     }
-    site.nextTime = new Date().getTime() + site.frequency;
+    site.nextTime = new Date().getTime() + getDelay(site);
     chrome.tabs.create({url: url, selected: false});
     localStorage['nexty.data'] = JSON.stringify(sites);
 }
