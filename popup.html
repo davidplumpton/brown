@@ -1,0 +1,54 @@
+<html>
+<head>
+<script src='jquery-1.4.4.min.js'></script>
+</head>
+<body>
+<h2>Configured Sites</h2>
+<div id='new-entry'>
+URL: <input id='new-url' size='40'/><br/>
+Frequency: <input id='new-frequency' size='5'/><br/>
+<img src='add.png' id='add-button'/>
+</div>
+<hr/>
+<div id='container'>
+</div>
+<script>
+
+function getSites()
+{
+    return JSON.parse(localStorage['nexty.data']);
+}
+
+function storeSites(sites)
+{
+    localStorage['nexty.data'] = JSON.stringify(sites);
+}
+
+function deleteRow(i)
+{
+    var sites = getSites();
+    sites = sites.slice(0, i).concat(sites.slice(i + 1, sites.length));
+    storeSites(sites);
+    display();
+}
+
+function display()
+{
+    var sites = getSites();
+    var s = '<table>';
+    var now = new Date().getTime();
+    for (var i = 0; i < sites.length; i++)
+    {
+        s += '<tr><td>';
+        s += '<img src="delete.png" onClick="javascript:deleteRow(' + i + ');"/></td><td>';
+        s += sites[i].url + '</td></tr>';
+    }
+    s += '</table>';
+    $('#container').html(s);
+}
+
+display();
+
+</script>
+</body>
+</html>

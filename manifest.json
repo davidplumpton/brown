@@ -1,0 +1,18 @@
+{
+    "name": "nexty",
+    "version": "0.1",
+    "description": "Go to the next bookmark",
+    "browser_action": {
+        "default_icon": "icon.png",
+        "popup": "popup.html"
+    },
+    "permissions": [
+        "bookmarks", "tabs"
+    ],
+    "background_page": "background.html",
+    "content_scripts": [{
+        "js": ["hotkey.js"],
+        "matches": ["http://*/*", "https://*/*"],
+        "run_at": "document_start"
+        }]
+}

@@ -1,0 +1,29 @@
+<html>
+<script>
+
+function compareSite(s1, s2) {
+    if (s1.nextTime < s2.nextTime) return -1;
+    if (s1.nextTime > s2.nextTime) return 1;
+    return 0;
+}
+
+function nextPage() {
+    var data = localStorage['nexty.data'];
+    var sites = JSON.parse(data);
+    sites.sort(compareSite);
+    var site = sites[0];
+    var url = site.url;
+    site.nextTime = new Date().getTime() + site.frequency;
+    chrome.tabs.create({url: url, selected: false});
+    localStorage['nexty.data'] = JSON.stringify(sites);
+}
+
+chrome.extension.onConnect.addListener(function(port) {
+    nextPage();
+});
+
+</script>
+<body>
+background
+</body>
+</html>
