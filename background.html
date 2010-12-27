@@ -13,6 +13,10 @@ function nextPage() {
     sites.sort(compareSite);
     var site = sites[0];
     var url = site.url;
+    if (url.indexOf('http') == -1)
+    {
+        url = 'http://' + url;
+    }
     site.nextTime = new Date().getTime() + site.frequency;
     chrome.tabs.create({url: url, selected: false});
     localStorage['nexty.data'] = JSON.stringify(sites);

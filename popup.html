@@ -7,7 +7,7 @@
 <div id='new-entry'>
 URL: <input id='new-url' size='40'/><br/>
 Frequency: <input id='new-frequency' size='5'/><br/>
-<img src='add.png' id='add-button'/>
+<input type='submit' value='Add' id='add-button' onClick='javascript:addRow();'/>
 </div>
 <hr/>
 <div id='container'>
@@ -28,6 +28,17 @@ function deleteRow(i)
 {
     var sites = getSites();
     sites = sites.slice(0, i).concat(sites.slice(i + 1, sites.length));
+    storeSites(sites);
+    display();
+}
+
+function addRow()
+{
+    var url = $('#new-url').val();
+    var frequency = $('#new-frequency').val();
+    var site = {url: url, nextTime: 0, frequency: frequency};
+    var sites = getSites();
+    sites = [site].concat(sites);
     storeSites(sites);
     display();
 }
