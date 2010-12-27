@@ -46,13 +46,20 @@ function addRow()
 function display()
 {
     var sites = getSites();
-    var s = '<table>';
+    var s = '<table><tr><td>Freq</td><td>Next</td><td>Del</td><td>Site</td></tr>';
     var now = new Date().getTime();
     for (var i = 0; i < sites.length; i++)
     {
         var site = sites[i];
         s += '<tr><td>';
         s += site.frequency + '</td><td>';
+        var delay = site.nextTime - now; 
+        if (delay <= 0) {
+            s += 'Due';
+        } else {
+            s += Math.ceil(delay / 60 / 60 / 1000) + ' hours';
+        }
+        s += '</td><td>';
         s += '<img src="delete.png" onClick="javascript:deleteRow(' + i + ');"/></td><td>';
         s += site.url + '</td></tr>';
     }
