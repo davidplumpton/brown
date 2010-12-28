@@ -28,12 +28,16 @@ function nextPage() {
     var sites = JSON.parse(data);
     sites.sort(compareSite);
     var site = sites[0];
+    var now = new Date().getTime();
+    if (site.nextTime > now) {
+        alert('Not yet scheduled: ' + site.url);
+    }
     var url = site.url;
     if (url.indexOf('http') == -1)
     {
         url = 'http://' + url;
     }
-    site.nextTime = new Date().getTime() + getDelay(site);
+    site.nextTime = now + getDelay(site);
     chrome.tabs.create({url: url, selected: false});
     localStorage['nexty.data'] = JSON.stringify(sites);
 }
