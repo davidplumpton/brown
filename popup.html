@@ -7,7 +7,9 @@
 <div id='new-entry'>
 URL: <input id='new-url' size='40'/><br/>
 Frequency: <input id='new-frequency' size='5'/><br/>
-<input type='submit' value='Add' id='add-button' onClick='javascript:addRow();'/>
+<input type='submit' value='Add' id='add-button' onClick='javascript:addRow();'/><br/>
+<input type='submit' value='Export Config' id='export-config' onClick='javascript:exportConfig();'/>&nbsp;
+<input type='submit' value='Import Config' id='import-config' onClick='javascript:showImportConfig();'/>
 </div>
 <hr/>
 <div id='container'>
@@ -65,6 +67,24 @@ function display()
     }
     s += '</table>';
     $('#container').html(s);
+}
+
+function exportConfig()
+{
+    var configText = localStorage['nexty.data'];
+    $('#container').html('<pre>\n' + configText + '\n</pre>');
+}
+
+function showImportConfig()
+{
+    $('#import-config').after('<input type="text" id="config"><br/><input type="submit" value="Save Config" onClick="javascript:importConfig();">');
+}
+
+function importConfig()
+{
+    var configText = $('#config').val();
+    localStorage['nexty.data'] = configText;
+    display();
 }
 
 display();
