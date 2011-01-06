@@ -5,7 +5,7 @@ function handleHotKey(e)
     // Look for Ctrl-Y
     if (e.keyCode == 89 && e.ctrlKey && !e.shiftKey && !e.altKey)
     {
-        var port = chrome.extension.connect({name: "nexty"});
+        var port = chrome.extension.connect({name: "brown"});
         port.postMessage({command: "nextPage"});
     }
 }

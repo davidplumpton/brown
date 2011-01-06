@@ -31,14 +31,16 @@ Frequency: <input id='new-frequency' size='5'/><br/>
 </div>
 <script>
 
+var storage = 'brown.data';
+
 function getSites()
 {
-    return JSON.parse(localStorage['nexty.data']);
+    return JSON.parse(localStorage[storage]);
 }
 
 function storeSites(sites)
 {
-    localStorage['nexty.data'] = JSON.stringify(sites);
+    localStorage[storage] = JSON.stringify(sites);
 }
 
 function deleteRow(i)
@@ -86,7 +88,7 @@ function display()
 
 function exportConfig()
 {
-    var configText = localStorage['nexty.data'];
+    var configText = localStorage[storage];
     $('#container').html('<pre>\n' + configText + '\n</pre>');
 }
 
@@ -98,7 +100,7 @@ function showImportConfig()
 function importConfig()
 {
     var configText = $('#config').val();
-    localStorage['nexty.data'] = configText;
+    localStorage[storage] = configText;
     display();
 }
 

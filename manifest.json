@@ -1,7 +1,7 @@
 {
-    "name": "nexty",
+    "name": "brown",
     "version": "0.1",
-    "description": "Go to the next bookmark",
+    "description": "Browsing Nirvana: Finds the next page.",
     "browser_action": {
         "default_icon": "icon.png",
         "popup": "popup.html"
