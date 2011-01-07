@@ -89,12 +89,13 @@ function display()
 function exportConfig()
 {
     var configText = localStorage[storage];
-    $('#container').html('<pre>\n' + configText + '\n</pre>');
+    $('#import-config').after('<input type="text" id="config"/><br/>');
+    $('#config').val(configText);
 }
 
 function showImportConfig()
 {
-    $('#import-config').after('<input type="text" id="config"><br/><input type="submit" value="Save Config" onClick="javascript:importConfig();">');
+    $('#import-config').after('<input type="text" id="config"/><br/><input type="submit" value="Save Config" onClick="javascript:importConfig();"/>');
 }
 
 function importConfig()
