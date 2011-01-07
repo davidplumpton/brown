@@ -2,5 +2,16 @@ Brown: Browsing Nirvana
 
 A plugin for Google Chrome that finds the next page you want to see using a single hotkey.
 
-Rather rough around the edges at this stage, but does exactly what I want.
+Rather rough around the edges at this stage, but it does exactly what I want. Configure URLs
+along with a desired browsing frequency which are stored using Local Storage, e.g.
+
+30h = 30 hours
+1d  = 1 days
+3w  = 3 weeks
+
+Then press Ctrl-Y to have Brown open the next site to visit in a new tab (you need to open one
+page first after installing Brown to register the hotkey).
+
+Exporting config is just copy/paste of the config JSON data. To import press the Import Config
+button and paste the JSON text into the field and press Save Config.
 
