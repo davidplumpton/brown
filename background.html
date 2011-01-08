@@ -40,6 +40,7 @@ function nextPage() {
         url = 'http://' + url;
     }
     site.nextTime = now + getDelay(site);
+    sites.sort(compareSite);
     chrome.tabs.create({url: url, selected: false});
     localStorage[storage] = JSON.stringify(sites);
 }
