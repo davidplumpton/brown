@@ -35,7 +35,11 @@ var storage = 'brown.data';
 
 function getSites()
 {
-    return JSON.parse(localStorage[storage]);
+    try {
+        return JSON.parse(localStorage[storage]);
+    } catch (e) {
+        return [];
+    }
 }
 
 function storeSites(sites)
