@@ -65,7 +65,7 @@ function addRow()
 function display()
 {
     var sites = getSites();
-    var s = '<table><tr><td>Freq</td><td>Next</td><td>Del</td><td>Site</td></tr>';
+    var s = '<table><tr><td>Freq</td><td>Hours</td><td>Del</td><td>Site</td></tr>';
     var now = new Date().getTime();
     for (var i = 0; i < sites.length; i++)
     {
@@ -76,7 +76,7 @@ function display()
         if (delay <= 0) {
             s += 'Due';
         } else {
-            s += Math.ceil(delay / 60 / 60 / 1000) + ' hours';
+            s += Math.ceil(delay / 60 / 60 / 1000);
         }
         s += '</td><td>';
         s += '<img src="delete.png" onClick="javascript:deleteRow(' + i + ');"/></td><td>';
