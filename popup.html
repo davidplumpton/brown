@@ -84,7 +84,7 @@ function display()
         }
         s += '</td><td>';
         s += '<img src="delete.png" onClick="javascript:deleteRow(' + i + ');"/></td><td>';
-        s += site.url + '</td></tr>';
+        s += '<a href="#" onClick="openUrl(\'' + site.url + '\');return false;">' + site.url + '</a></td></tr>';
     }
     s += '</table>';
     $('#container').html(s);
@@ -107,6 +107,15 @@ function importConfig()
     var configText = $('#config').val();
     localStorage[storage] = configText;
     display();
+}
+
+function openUrl(url)
+{
+    if (url.indexOf('http') == -1)
+    {
+        url = 'http://' + url;
+    }
+    chrome.tabs.create({url: url, selected: false});
 }
 
 display();
