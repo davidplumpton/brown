@@ -1,7 +1,6 @@
 <html>
+<script src='common.js'></script>
 <script>
-
-var storage = 'brown.data';
 
 function compareSite(s1, s2) {
     if (s1.nextTime < s2.nextTime) return -1;
@@ -26,8 +25,7 @@ function getDelay(site) {
 }
 
 function nextPage() {
-    var data = localStorage[storage];
-    var sites = JSON.parse(data);
+    var sites = getSites();
     sites.sort(compareSite);
     var site = sites[0];
     var now = new Date().getTime();
@@ -42,7 +40,7 @@ function nextPage() {
     site.nextTime = now + getDelay(site);
     sites.sort(compareSite);
     chrome.tabs.create({url: url, selected: false});
-    localStorage[storage] = JSON.stringify(sites);
+    storeSites(sites);
 }
 
 chrome.extension.onConnect.addListener(function(port) {

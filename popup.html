@@ -16,6 +16,7 @@
 <html>
 <head>
 <script src='jquery-1.4.4.min.js'></script>
+<script src='common.js'></script>
 </head>
 <body>
 <h2>Configured Sites</h2>
@@ -30,22 +31,6 @@ Frequency: <input id='new-frequency' size='5'/>&nbsp;e.g.&nbsp;2w&nbsp;or&nbsp;7
 <div id='container'>
 </div>
 <script>
-
-var storage = 'brown.data';
-
-function getSites()
-{
-    try {
-        return JSON.parse(localStorage[storage]);
-    } catch (e) {
-        return [];
-    }
-}
-
-function storeSites(sites)
-{
-    localStorage[storage] = JSON.stringify(sites);
-}
 
 function deleteRow(i)
 {
