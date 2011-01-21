@@ -15,3 +15,6 @@ page first after installing Brown to register the hotkey).
 Exporting config is just copy/paste of the config JSON data. To import press the Import Config
 button and paste the JSON text into the field and press Save Config.
 
+The URLs can be seen in the popup window and selected ahead of time, which also causes the
+URL's next visit time to be rescheduled.
+

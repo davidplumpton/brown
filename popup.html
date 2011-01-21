@@ -96,11 +96,25 @@ function importConfig()
 
 function openUrl(url)
 {
+    var fullUrl = url;
     if (url.indexOf('http') == -1)
     {
-        url = 'http://' + url;
+        fullUrl = 'http://' + url;
     }
-    chrome.tabs.create({url: url, selected: false});
+    chrome.tabs.create({url: fullUrl, selected: false});
+    sites = getSites();
+    var now = new Date().getTime();
+    for (var i = 0; i < sites.length; i++)
+    {
+        var site = sites[i];
+        if (url == site.url)
+        {
+            site.nextTime = now + getDelay(site);
+            sites.sort(compareSite);
+            storeSites(sites);
+            return;
+        }
+    }
 }
 
 display();
