@@ -1,6 +1,6 @@
 {
     "name": "Brown",
-    "version": "0.3",
+    "version": "0.4",
     "description": "Browsing Nirvana: Finds the next page.",
     "browser_action": {
         "default_icon": "icon.png",
@@ -14,5 +14,6 @@
         "js": ["hotkey.js"],
         "matches": ["http://*/*", "https://*/*"],
         "run_at": "document_start"
-        }]
+        }],
+    "options_page": "popup.html"
 }
