@@ -8,7 +8,8 @@ function nextPage() {
     var site = sites[0];
     var now = new Date().getTime();
     if (site.nextTime > now) {
-        alert('Not yet scheduled: ' + site.url);
+        var notification = window.webkitNotifications.createNotification('icon.png', 'No sites pending', 'You have no more pending sites to visit. Relax!')
+        notification.show();
     }
     var url = site.url;
     if (url.indexOf('http') == -1)
