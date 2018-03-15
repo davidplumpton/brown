@@ -15,110 +15,21 @@
 -->
 <html>
 <head>
-<script src='jquery-1.5.min.js'></script>
+<script src='jquery-3.3.1.min.js'></script>
 <script src='common.js'></script>
+<script src='popup.js'></script>
 </head>
 <body>
 <h2>Configured Sites</h2>
 <div id='new-entry'>
 URL: <input id='new-url' size='40'/><br/>
 Frequency: <input id='new-frequency' size='5'/>&nbsp;e.g.&nbsp;2w&nbsp;or&nbsp;72h&nbsp;or&nbsp;1d<br/>
-<input type='submit' value='Add' id='add-button' onClick='javascript:addRow();'/><br/>
-<input type='submit' value='Export Config' id='export-config' onClick='javascript:exportConfig();'/>&nbsp;
-<input type='submit' value='Import Config' id='import-config' onClick='javascript:showImportConfig();'/>
+<input type='submit' value='Add' id='add-button' /><br/>
+<input type='submit' value='Export Config' id='export-config' />&nbsp;
+<input type='submit' value='Import Config' id='import-config' />
 </div>
 <hr/>
 <div id='container'>
 </div>
-<script>
-
-function deleteRow(i)
-{
-    var sites = getSites();
-    sites = sites.slice(0, i).concat(sites.slice(i + 1, sites.length));
-    storeSites(sites);
-    display();
-}
-
-function addRow()
-{
-    var url = $('#new-url').val();
-    var frequency = $('#new-frequency').val();
-    var site = {url: url, nextTime: 0, frequency: frequency};
-    var sites = getSites();
-    sites = [site].concat(sites);
-    storeSites(sites);
-    display();
-}
-
-function display()
-{
-    var sites = getSites();
-    var s = '<table><tr><td>Freq</td><td>Hours</td><td>Del</td><td>Site</td></tr>';
-    var now = new Date().getTime();
-    for (var i = 0; i < sites.length; i++)
-    {
-        var site = sites[i];
-        s += '<tr><td>';
-        s += site.frequency + '</td><td>';
-        var delay = site.nextTime - now; 
-        if (delay <= 0) {
-            s += 'Due';
-        } else {
-            s += Math.ceil(delay / 60 / 60 / 1000);
-        }
-        s += '</td><td>';
-        s += '<img src="delete.png" onClick="javascript:deleteRow(' + i + ');"/></td><td>';
-        s += '<a href="#" onClick="openUrl(\'' + site.url + '\');return false;">' + site.url + '</a></td></tr>';
-    }
-    s += '</table>';
-    $('#container').html(s);
-}
-
-function exportConfig()
-{
-    var configText = localStorage[storage];
-    $('#import-config').after('<input type="text" id="config"/><br/>');
-    $('#config').val(configText);
-}
-
-function showImportConfig()
-{
-    $('#import-config').after('<input type="text" id="config"/><br/><input type="submit" value="Save Config" onClick="javascript:importConfig();"/>');
-}
-
-function importConfig()
-{
-    var configText = $('#config').val();
-    localStorage[storage] = configText;
-    display();
-}
-
-function openUrl(url)
-{
-    var fullUrl = url;
-    if (url.indexOf('http') == -1)
-    {
-        fullUrl = 'http://' + url;
-    }
-    chrome.tabs.create({url: fullUrl, selected: false});
-    sites = getSites();
-    var now = new Date().getTime();
-    for (var i = 0; i < sites.length; i++)
-    {
-        var site = sites[i];
-        if (url == site.url)
-        {
-            site.nextTime = now + getDelay(site);
-            sites.sort(compareSite);
-            storeSites(sites);
-            return;
-        }
-    }
-}
-
-display();
-
-</script>
 </body>
 </html>
